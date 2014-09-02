@@ -1,0 +1,99 @@
+"""""""""""""
+" My .vimrc "
+"""""""""""""
+
+"use filetype plugins
+filetype plugin on
+filetype indent on
+
+"use syntax highlighting
+syntax enable
+
+"set colorscheme
+colorscheme herald
+
+"use automatic and smart indenting
+set autoindent
+set smartindent
+"process changes made externally
+set autoread
+
+"change backspace behaviour
+set backspace=eol,indent,start
+
+"use UTF8 encoding
+set encoding=utf8
+
+"convert tabs to spaces
+set expandtab
+"use smarttab behaviour
+set smarttab
+
+"make unix default file type
+set ffs=unix,dos,mac
+
+"highlight search matches
+set hlsearch
+
+"if pattern has uppercase letter, it is case-sensitive; otherwise it is not
+set ignorecase
+set smartcase
+
+"always display status line
+set laststatus=2
+"format the status line
+"set statusline=%F\ %y\ cwd:%{getcwd()}\ %l\,%v\ %P
+set statusline=%F\ %y\ %l\,%v\ %P
+
+"use magic for regex
+set magic
+
+"don't automatically create backup files
+set nobackup
+set noswapfile
+set nowritebackup
+
+"turn off error bells
+set noerrorbells
+set novisualbell
+set t_vb=
+
+"display current position
+set ruler
+
+"set default shift and tab width to 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+"highlight matching braces
+set showmatch
+
+"use the wildmenu (commandline tab-completion)
+set wildmenu
+
+"use line wrapping
+set wrap
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM-LATEX
+"
+" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+filetype plugin on
+
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: This enables automatic indentation as you type.
+filetype indent on
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
