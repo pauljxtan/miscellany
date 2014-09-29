@@ -9,7 +9,7 @@ PROGS = $(patsubst %.c,%,$(SRCS))
 all: $(PROGS)
 
 %:%.c
-	$(CC) $(CFLAGS) -o bin/$@ $<
+	$(CC) $(CFLAGS) -o bin/$@ $< $(LIBS)
 
 clean:
 	rm $(PROGS)
