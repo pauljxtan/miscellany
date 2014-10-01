@@ -7,7 +7,6 @@
 void squeeze(char [], char []);
 
 int main() {
-    int i;
     char str1[] = "abcdefghijklmnopqrstuvwxyz";
     char str2[] = "bdfhjlnprtvxz";
 
