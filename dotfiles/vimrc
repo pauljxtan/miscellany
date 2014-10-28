@@ -74,6 +74,9 @@ set wildmenu
 "use line wrapping
 set wrap
 
+"disable auto-commenting
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM-LATEX
 "
@@ -96,4 +99,8 @@ filetype indent on
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+
+"set default target format to pdf
+let g:Tex_DefaultTargetFormat='pdf'
+"let g:Tex_CompileRule_pdf='pdflatex -interaction=nonstopmode $*'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
