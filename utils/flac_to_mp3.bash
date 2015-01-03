@@ -2,7 +2,7 @@
 
 # Converts FLAC files to mp3, with tags.
 
-for INFILE in "$*"
+for INFILE in "$@"
 do
     OUTFILE="${INFILE[@]/%flac/mp3}"
 
