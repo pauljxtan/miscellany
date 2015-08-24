@@ -2,80 +2,103 @@
 " My .vimrc "
 """""""""""""
 
-"use filetype plugins
+"""" VISUAL STUFF
+" set colorscheme
+colorscheme herald
+" use syntax processing
+syntax enable
+" use filetype plugins
 filetype plugin on
 filetype indent on
-
-"use syntax highlighting
-syntax enable
-
-"set colorscheme
-colorscheme herald
-
-"use automatic and smart indenting
-set autoindent
-set smartindent
-"process changes made externally
-set autoread
-
-"change backspace behaviour
-set backspace=eol,indent,start
-
-"use UTF8 encoding
-set encoding=utf8
-
-"convert tabs to spaces
-set expandtab
-"use smarttab behaviour
-set smarttab
-
-"make unix default file type
-set ffs=unix,dos,mac
-
-"highlight search matches
-set hlsearch
-
-"if pattern has uppercase letter, it is case-sensitive; otherwise it is not
-set ignorecase
-set smartcase
-
-"always display status line
+" show line numbers
+"set number
+" show latest command
+set showcmd 
+" show cursor line
+set cursorline
+" show tab-completion matches
+set wildmenu
+" highlight matching braces (kind of annoying with blinking cursor)
+set showmatch
+" (to turn off) let g:loaded_matchparen=1
+" display current position
+set ruler
+" always show status line
 set laststatus=2
-"format the status line
+" format the status line
 "set statusline=%F\ %y\ cwd:%{getcwd()}\ %l\,%v\ %P
 set statusline=%F\ %y\ %l\,%v\ %P
+"use line wrapping
+set wrap
+""""
 
+"""" FILE FORMAT, ENCODING
+" make unix default file type
+set ffs=unix,dos,mac
+" use utf8 encoding
+set encoding=utf8
+""""
+
+"""" SPACES, TABS, INDENTING
+" set default shift and tab width to 4 spaces
+set shiftwidth=4
+set tabstop=4
+" convert tabs to spaces
+set expandtab
+" use smart tabbing
+set smarttab
+" use automatic indenting
+set autoindent
+" use smart indenting
+set smartindent
+" make backspace work properly
+set backspace=2
+"set backspace=eol,indent,start
+""""
+
+"""" SEARCHING
+" highlight search matches
+set hlsearch
+" search while typing
+set incsearch
+" pattern is case-sensitive only if it includes uppercase
+set ignorecase
+set smartcase
 "use magic for regex
 set magic
+""""
 
+"""" FOLDING
+" enable folding
+set foldenable
+" set initial fold level
+set foldlevel=0
+" set maximum number of nested folds
+set foldnestmax=10
+" set fold method
+set foldmethod=indent
+""""
+
+"""" SYSTEM
+" detect changes made externally
+set autoread
 "don't automatically create backup files
 set nobackup
 set noswapfile
 set nowritebackup
+""""
 
+"""" ERRORS
 "turn off error bells
 set noerrorbells
 set novisualbell
 set t_vb=
+""""
 
-"display current position
-set ruler
-
-"set default shift and tab width to 4 spaces
-set shiftwidth=4
-set tabstop=4
-
-"highlight matching braces
-set showmatch
-
-"use the wildmenu (commandline tab-completion)
-set wildmenu
-
-"use line wrapping
-set wrap
-
-"disable auto-commenting
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"""" MISC
+" disable auto-commenting
+"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM-LATEX
