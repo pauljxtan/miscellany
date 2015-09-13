@@ -1,8 +1,8 @@
 import random
 import unittest
 
-from search import binary_search
-from sort import insertion_sort, merge_sort, selection_sort, bubble_sort
+import search
+import sort
 
 class Tests(unittest.TestCase):
 
@@ -23,9 +23,9 @@ class Tests(unittest.TestCase):
 
         # Binary search
         # --- value found
-        self.assertEqual(binary_search(x, v), idx)
+        self.assertEqual(search.binary_search(x, v), idx)
         # --- value not found
-        self.assertEqual(binary_search(x, max_value + 1), -1)
+        self.assertEqual(search.binary_search(x, max_value + 1), -1)
 
     def test_sort(self):
         # Set up array to sort
@@ -34,16 +34,20 @@ class Tests(unittest.TestCase):
         x = [random.randint(0, max_value) for i in range(array_len)]
 
         # Insertion sort
-        self.assertEqual(insertion_sort(x), sorted(x))
+        self.assertEqual(sort.insertion_sort(x), sorted(x))
 
         # Merge sort
-        self.assertEqual(merge_sort(x), sorted(x))
+        self.assertEqual(sort.merge_sort(x), sorted(x))
         
         # Selection sort
-        self.assertEqual(selection_sort(x), sorted(x))
+        self.assertEqual(sort.selection_sort(x), sorted(x))
         
         # Bubble sort
-        self.assertEqual(bubble_sort(x), sorted(x))
+        self.assertEqual(sort.bubble_sort(x), sorted(x))
+
+        # Heap sort
+        self.assertEqual(sort.heap_sort(x), sorted(x))
+
 
 if __name__ == '__main__':
     unittest.main()
