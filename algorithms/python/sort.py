@@ -1,4 +1,4 @@
-import heapq
+import math
 
 def insertion_sort(x):
     """
@@ -127,5 +127,48 @@ def bubble_sort(x):
         for j in range(n - 1, i, -1):
             if x[j] < x[j - 1]:
                 x[j], x[j - 1] = x[j - 1], x[j]
+
+    return x
+
+def heap_sort(x):
+    """
+    Sorts an array x in non-decreasing order using the heap sort algorithm.
+
+    @type  x: array
+    @param x: the array to sort
+
+    @rtype: array
+    @return: the sorted array
+    """
+    n = len(x)
+
+    # Build the heap by repeatedly sifting down the root
+    start = int(math.floor((n - 2) / 2))
+    while start >= 0:
+        x = sift_down(x, start, n - 1)
+        start -= 1
+
+    end = n - 1
+    while end > 0:
+        x[0], x[end] = x[end], x[0]
+        end -= 1
+        x = sift_down(x, 0, end)
+
+    return x
+
+def sift_down(x, root, end):
+    while 2 * root + 1 <= end:
+        child = 2 * root + 1
+        swap = root
+
+        if x[swap] < x[child]:
+            swap = child
+        if child + 1 <= end and x[child] < x[child + 1]:
+            child += 1
+        if x[root] < x[child]:
+            x[root], x[child] = x[child], x[root]
+            root = child
+        else:
+            break
 
     return x
