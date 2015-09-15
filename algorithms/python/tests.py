@@ -3,13 +3,14 @@ import unittest
 
 import search
 import sort
+import sums
 
 class Tests(unittest.TestCase):
 
     def test_search(self):
         # Set up array to search
-        array_len = 1000
-        max_value = 1000
+        array_len = 1024
+        max_value = 1024
 
         # With duplicate values (needs stable binary search)
         #x = sorted([random.randint(0, max_value) for i in range(array_len)])
@@ -29,8 +30,8 @@ class Tests(unittest.TestCase):
 
     def test_sort(self):
         # Set up array to sort
-        array_len = 1000
-        max_value = 1000
+        array_len = 1024
+        max_value = 1024
         x = [random.randint(0, max_value) for i in range(array_len)]
 
         # Insertion sort
@@ -48,6 +49,16 @@ class Tests(unittest.TestCase):
         # Heap sort
         self.assertEqual(sort.heap_sort(x), sorted(x))
 
+    def test_sums(self):
+        # Set up array to sum
+        array_len = 512
+        max_value = 512
+        x = [random.randint(0, max_value) for i in range(array_len)]
+
+        # Down-by-one recursion
+        self.assertEqual(sums.sum_rec_one(x), sum(x))
+        # Divide-by-halves recursion
+        self.assertEqual(sums.sum_rec_halves(x), sum(x))
 
 if __name__ == '__main__':
     unittest.main()
