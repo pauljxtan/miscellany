@@ -1,11 +1,24 @@
 import random
 import unittest
 
+import convert
 import search
 import sort
 import sums
 
 class Tests(unittest.TestCase):
+
+    def test_convert(self):
+        # Base-10 to base-n
+        #n = random.randint(1, 16)
+        self.assertEqual(convert.base10_to_basen(42, 2),  "101010")
+        self.assertEqual(convert.base10_to_basen(42, 3),  "1120")
+        self.assertEqual(convert.base10_to_basen(42, 4),  "222")
+        self.assertEqual(convert.base10_to_basen(42, 5),  "132")
+        self.assertEqual(convert.base10_to_basen(42, 6),  "110")
+        self.assertEqual(convert.base10_to_basen(42, 7),  "60")
+        self.assertEqual(convert.base10_to_basen(42, 8),  "52")
+        self.assertEqual(convert.base10_to_basen(42, 9),  "46")
 
     def test_search(self):
         # Set up array to search
