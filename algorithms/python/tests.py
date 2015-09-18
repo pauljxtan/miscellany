@@ -32,12 +32,15 @@ class Tests(unittest.TestCase):
         x = range(max_value + 1)
         
         # Pick a random value to search for
-        v = random.choice(x)
+        v = random.choice(x[1:-1])
         idx = x.index(v)
 
         # Binary search
         # --- value found
         self.assertEqual(search.binary_search(x, v), idx)
+        # (Edge cases)
+        self.assertEqual(search.binary_search(x, x[0]), 0)
+        self.assertEqual(search.binary_search(x, x[array_len - 1]), array_len - 1)
         # --- value not found
         self.assertEqual(search.binary_search(x, max_value + 1), -1)
 
@@ -74,5 +77,5 @@ class Tests(unittest.TestCase):
         self.assertEqual(sums.sum_rec_halves(x), sum(x))
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
 
