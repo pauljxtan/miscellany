@@ -75,6 +75,10 @@ class Tests(unittest.TestCase):
         self.assertEqual(sums.sum_rec_one(x), sum(x))
         # Divide-by-halves recursion
         self.assertEqual(sums.sum_rec_halves(x), sum(x))
+        # Going-up recursion
+        self.assertEqual(sums.sum_rec_goingup(x, 0, array_len - 1), sum(x))
+        # Going-down recursion
+        self.assertEqual(sums.sum_rec_goingdown(x, 0, array_len - 1), sum(x))
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
