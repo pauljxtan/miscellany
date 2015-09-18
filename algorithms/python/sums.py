@@ -29,3 +29,22 @@ def sum_rec_halves(x):
         return x[0]
     # sum of 1st half plus sum of 2nd half
     return sum_rec_halves(x[:n/2]) + sum_rec_halves(x[n/2:])
+
+def sum_rec_goingup(x, i, j):
+    """
+    """
+    if i < j:
+        return x[i] + sum_rec_goingup(x, i + 1, j)
+    if i == j:
+        return x[i]
+    return 0
+
+def sum_rec_goingdown(x, i, j):
+    """
+    """
+    if i < j:
+        return x[j] + sum_rec_goingup(x, i, j - 1)
+    if i == j:
+        return x[i]
+    return 0
+
