@@ -30,21 +30,38 @@ def sum_rec_halves(x):
     # sum of 1st half plus sum of 2nd half
     return sum_rec_halves(x[:n/2]) + sum_rec_halves(x[n/2:])
 
-def sum_rec_goingup(x, i, j):
+def sum_rec_goingup_idx(x, i, j):
     """
     """
     if i < j:
-        return x[i] + sum_rec_goingup(x, i + 1, j)
+        return x[i] + sum_rec_goingup_idx(x, i + 1, j)
     if i == j:
         return x[i]
     return 0
 
-def sum_rec_goingdown(x, i, j):
+def sum_rec_goingup(x):
+    return sum_rec_goingup_idx(x, 0, len(x) - 1)
+
+def sum_rec_goingdown_idx(x, i, j):
     """
     """
     if i < j:
-        return x[j] + sum_rec_goingup(x, i, j - 1)
+        return x[j] + sum_rec_goingup_idx(x, i, j - 1)
     if i == j:
         return x[i]
     return 0
 
+def sum_rec_goingdown(x):
+    return sum_rec_goingdown_idx(x, 0, len(x) - 1)
+
+def sum_rec_edgecenter_idx(x, i, j):
+    """
+    """
+    if i < j:
+        return x[i] + x[j] + sum_rec_edgecenter_idx(x, i + 1, j - 1)
+    if i == j:
+        return x[i]
+    return 0
+
+def sum_rec_edgecenter(x):
+    return sum_rec_edgecenter_idx(x, 0, len(x) - 1)
