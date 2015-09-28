@@ -6,6 +6,9 @@ import search
 import sort
 import sums
 
+# TODO
+#     more edge cases
+
 class Tests(unittest.TestCase):
 
     def test_convert(self):
@@ -76,9 +79,11 @@ class Tests(unittest.TestCase):
         # Divide-by-halves recursion
         self.assertEqual(sums.sum_rec_halves(x), sum(x))
         # Going-up recursion
-        self.assertEqual(sums.sum_rec_goingup(x, 0, array_len - 1), sum(x))
+        self.assertEqual(sums.sum_rec_goingup(x), sum(x))
         # Going-down recursion
-        self.assertEqual(sums.sum_rec_goingdown(x, 0, array_len - 1), sum(x))
+        self.assertEqual(sums.sum_rec_goingdown(x), sum(x))
+        # Edge-center recursion
+        self.assertEqual(sums.sum_rec_edgecenter(x), sum(x))
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
