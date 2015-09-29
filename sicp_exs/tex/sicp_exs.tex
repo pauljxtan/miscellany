@@ -1,0 +1,139 @@
+\documentclass{report}
+\usepackage{amsfonts, amsmath, amssymb, hyperref}
+\renewcommand{\chaptername}{}
+
+\title{Solutions to exercises in SICP (2e)}
+\author{Paul Tan (\href{http://pauljxtan.com}{website}, \href{https://github.com/pauljxtan}{github})}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Exercise 1.10}
+
+This is a pretty fun exercise in rendering Scheme procedures in mathematical notation. Personally, I find it helps with visualizing the recursive process. \\
+
+Ackermann's function is defined in the question as
+
+\begin{equation}
+  A(x, y) = \begin{cases}
+    0 & \text{if } y = 0 \\
+    2y & \text{if } x = 0 \\
+    2 & \text{if } y = 1 \\
+    A(x - 1, A(x, y - 1)) & \text{otherwise}
+  \end{cases}
+\end{equation}
+
+For each of the given expressions, we have
+
+\begin{align*}
+  A(1, 10) &= A(0, A(1, 9)) \\
+           &= A(0, A(0, A(1, 8))) \\
+           &= A(0, A(0, A(0, A(1, 7)))) \\
+           &= A(0, A(0, A(0, A(0, A(1, 6))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, A(1, 5)))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, A(0, A(1, 4))))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, A(0, A(0, A(1, 3)))))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, A(0, A(0, A(0, A(1, 2))))))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, A(0, A(0, A(0, A(0, A(1, 1)))))))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, A(0, A(0, A(0, A(0, 2))))))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, A(0, A(0, A(0, 2\cdot2)))))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, A(0, A(0, 2\cdot2\cdot2))))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, A(0, 2\cdot2\cdot2\cdot2)))))) \\
+           &= A(0, A(0, A(0, A(0, A(0, 2\cdot2\cdot2\cdot2\cdot2))))) \\
+           &= A(0, A(0, A(0, A(0, 2\cdot2\cdot2\cdot2\cdot2\cdot2)))) \\
+           &= A(0, A(0, A(0, 2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2))) \\
+           &= A(0, A(0, 2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2)) \\
+           &= A(0, 2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2) \\
+           &= 2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2 \\
+           &= 2^{10}
+\end{align*}
+
+In general, it appears that for $n > 0$ we have
+
+\begin{equation}
+  A(1, n) = 2^n
+\end{equation}
+
+(Recall that $A(1, 0) = 0$ by definition.) \\
+
+Next expression:
+
+\begin{align*}
+  A(2, 4) &= A(1, A(2, 3)) \\
+          &= A(1, A(1, A(2, 2))) \\
+          &= A(1, A(1, A(1, A(2, 1)))) \\
+          &= A(1, A(1, A(1, 2))) \\
+          &= A(1, A(1, 2^2)) \quad &\text{using the result found above} \\
+          &= A(1, 2^{2^2}) \quad &\text{ditto} \\
+          &= 2^{2^{2^2}} \quad &\text{and again} \\
+          &= 2^{2^4} \\
+          &= 2^{16} \\
+          &= 65536
+\end{align*}
+
+And one more:
+
+\begin{align*}
+  A(3, 3) &= A(2, A(3, 2)) \\
+          &= A(2, A(2, A(3, 1))) \\
+          &= A(2, A(2, 2)) \\
+          &= A(2, A(1, A(2, 1)) \\
+          &= A(2, A(1, 2)) \\
+          &= A(2, A(0, A(1, 1))) \\
+          &= A(2, A(0, 2)) \\
+          &= A(2, 4) \\
+          &= A(1, A(2, 3)) \\
+          &= A(1, A(1, A(2, 2))) \\
+          &= A(1, A(1, A(1, A(2, 1)))) \\
+          &= A(1, A(1, A(1, 2))) \\
+          &= A(1, A(1, A(0, A(1, 1)))) \\
+          &= A(1, A(1, A(0, 2))) \\
+          &= A(1, A(1, 4)) & \text{familiar pattern emerging\dots} \\
+          &= A(1, A(0, A(1, 3))) \\
+          &= A(1, A(0, A(0, A(1, 2)))) \\
+          &= A(1, A(0, A(0, A(0, A(1, 1))))) \\
+          &= A(1, A(0, A(0, A(0, 2)))) \\
+          &= A(1, A(0, A(0, 4))) \\
+          &= A(1, A(0, 8)) \\
+          &= A(1, 16) \\
+          &= 2^{16} \\
+          &= 65536 \\
+\end{align*}
+
+(Gotta say, the way the equations ``fan'' in and out like that is pretty neat. First it fans out 3 times, then 2, then just once on the final expansion.) \\
+
+Just to check, I computed these values in \textbf{sicp\_1-10\_check.scm} and they are indeed correct. Phew! \\
+
+The last part is essentially the same idea, but with a variable parameter $n$. Let's see\dots
+
+\begin{align*}
+  f(n) &= A(0, n) \\
+       &= 2n
+\end{align*}
+
+\begin{align*}
+  g(n) &= A(1, n) \\
+       &= A(0, A(1, n - 1)) \\
+       &= 2 \cdot A(1, n - 1) \\
+       &= 2 \cdot A(0, A(1, n - 2)) \\
+       &= 2 \cdot 2 \cdot A(1, n - 2) \\
+       &= \dots & \text{follow the pattern\dots} \\
+       &= 2^{n - 1} \cdot A(1, 1) \\
+       &= 2^{n - 1} \cdot 2 \\
+       &= 2^n & \text{as found earlier!}
+\end{align*}
+
+\begin{align*}
+  h(n) &= A(2, n) \\
+       &= A(1, A(2, n - 1)) \\
+       &= A(0, A(1, A(2, n - 1))) \\
+       &= 2 \cdot A(1, A(2, n - 1)) \\
+       &= 2 \cdot A(0, A(1, A(2, n - 1))) \\
+       &= 2 \cdot 2 \cdot A(1, A(2, n - 1)) \\
+\end{align*}
+
+TBC
+
+\end{document}
