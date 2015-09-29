@@ -1,0 +1,16 @@
+(use-modules (ice-9 format))
+
+(define (A x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (A (- x 1)
+                 (A x (- y 1))))))
+
+(format #t "A(1 10) = ~d\n" (A 1 10))
+(format #t "A(2 4)  = ~d\n" (A 2 4))
+(format #t "A(3 3)  = ~d\n\n" (A 3 3))
+(format #t "A(2 1)  = ~d\n" (A 2 1))
+(format #t "A(2 2)  = ~d\n" (A 2 2))
+(format #t "A(2 3)  = ~d\n" (A 2 3))
+(format #t "A(2 4)  = ~d\n" (A 2 4))
