@@ -1,6 +1,7 @@
 \documentclass{report}
 \usepackage{amsfonts, amsmath, amssymb, hyperref}
 \renewcommand{\chaptername}{}
+\setlength{\parindent}{0pt}
 
 \title{Solutions to exercises in SICP (2e)}
 \author{Paul Tan (\href{http://pauljxtan.com}{website}, \href{https://github.com/pauljxtan}{github})}
@@ -128,12 +129,29 @@ The last part is essentially the same idea, but with a variable parameter $n$. L
 \begin{align*}
   h(n) &= A(2, n) \\
        &= A(1, A(2, n - 1)) \\
-       &= A(0, A(1, A(2, n - 1))) \\
-       &= 2 \cdot A(1, A(2, n - 1)) \\
-       &= 2 \cdot A(0, A(1, A(2, n - 1))) \\
-       &= 2 \cdot 2 \cdot A(1, A(2, n - 1)) \\
+       &= A(1, A(1, A(2, n - 2))) \\
+       &= A(1, A(1, A(1, A(2, n - 3)))) \\
 \end{align*}
 
-TBC
+At this point, note that the levels of nesting is equal to the number $m$ in $n - m$ at the end\dots
+
+\begin{align*}
+  \Rightarrow h(n)
+       &= A(1, A(1, A(1, \dots A(1, A(2, 1)) \dots ))) \\
+       &= A(1, A(1, A(1, \dots A(1, 2) \dots ))) & \text{We know what $A(1, n)$ is from earlier!} \\
+       &= A(1, A(1, A(1, \dots 2^2 \dots ))) & \text{Now we "fold" it back in $n - 1$ times\dots} \\
+       &= 2^{2^{2^{\dots}}} & \text{with $n$ "2"s} \\
+\end{align*}
+
+That is,
+
+\begin{align*}
+  A(2, 1) &= 2 \\
+  A(2, 2) &= 2^2 = 4 \\
+  A(2, 3) &= 2^{2^2} = 16 \\
+  A(2, 4) &= 2^{2^{2^2}} = 65536 \quad \text{(as we found earlier)}
+\end{align*}
+
+and so on. To be honest, I have no idea how to formulate this as a ``concise mathematical definition''. Any suggestions welcome\dots
 
 \end{document}
