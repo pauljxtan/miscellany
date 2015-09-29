@@ -13,12 +13,12 @@
 (define (cube x)
   (* x x x))
 
-(define (cbrt x)
+(define (cbrt x delta init-guess)
   
   (define (good-enough? guess)
     (< (abs (- (cube guess) 
                x))
-       0.000001))
+       delta))
   
   ; (x/y^2 + 2*y) / 3
   (define (improve guess)
@@ -33,12 +33,12 @@
       guess
       (cbrt-iter (improve guess))))
 
-  (cbrt-iter 1.0)
+  (cbrt-iter init-guess)
 )
 
-(format #t "cbrt(8)   = ~f\n" (cbrt 8))
-(format #t "cbrt(27)  = ~f\n" (cbrt 27))
-(format #t "cbrt(64)  = ~f\n" (cbrt 64))
-(format #t "cbrt(125) = ~f\n" (cbrt 125))
-(format #t "cbrt(216) = ~f\n" (cbrt 216))
-(format #t "cbrt(343) = ~f\n" (cbrt 343))
+(format #t "cbrt(8)   = ~f\n" (cbrt 8 0.000001 1.0))
+(format #t "cbrt(27)  = ~f\n" (cbrt 27 0.000001 1.0))
+(format #t "cbrt(64)  = ~f\n" (cbrt 64 0.000001 1.0))
+(format #t "cbrt(125) = ~f\n" (cbrt 125 0.000001 1.0))
+(format #t "cbrt(216) = ~f\n" (cbrt 216 0.000001 1.0))
+(format #t "cbrt(343) = ~f\n" (cbrt 343 0.000001 1.0))
