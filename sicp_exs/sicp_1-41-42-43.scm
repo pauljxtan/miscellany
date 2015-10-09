@@ -1,4 +1,4 @@
-; SICP Exercise 1.41 & 1.42
+; SICP Exercise 1.41 & 1.42 & 1.43
 ; Higher-order procedures / function composition
 
 (use-modules (ice-9 format))
@@ -20,6 +20,16 @@
 (define (double-alt f)
   (compose f f))
 
+; Exercise 1.43:
+
+(define (repeated-rec f i k)
+  (if (= i k)
+    f
+    (compose f (repeated-rec f (+ i 1) k))))
+
+(define (repeated f k)
+  (repeated-rec f 1 k))
+
 (format #t "1+1     = ~d\n" (inc 1))
 (format #t "(1+1)+1 = ~d\n" ((double inc) 1))
 (newline)
@@ -27,3 +37,6 @@
 (format #t "(2^2)^2 = ~d\n" ((double-alt square) 2))
 (newline)
 (format #t "(6+1)^2 = ~d\n" ((compose square inc) 6)) 
+(newline)
+(format #t "(5^2)^2 = ~d\n" ((repeated square 2) 5))
+
