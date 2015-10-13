@@ -1,6 +1,5 @@
 /* K&R Exercise 2-4
- * Write an alternative version of squeece(s1,s2) that deletes each character
- * in s1 that matches any character in the string s2. */
+ * Delete characters in one string that matches character in another string */
 
 #include <stdio.h>
 

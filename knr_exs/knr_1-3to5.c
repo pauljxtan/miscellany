@@ -1,11 +1,5 @@
-/* K&R Exercise 1-3:
- * Modify the temperature conversion program to print a heading above the
- * table.
- * K&R Exercise 1-4
- * Write a program to print the corresponding Celsius to Fahrenheit table.
- * K&R Exercise 1-5
- * Modify the temperature conversion program to print the table in reverse
- * order, that is, from 300 degrees to 0. */
+/* K&R Exercise 1-3
+ * String formatting stuff */
 
 #include <stdio.h>
 

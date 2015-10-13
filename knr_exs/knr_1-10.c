@@ -1,7 +1,6 @@
 /* K&R Exercise 1-10
- * Write a program to copy its input to its output, replacing each tab by \t,
- * each backspace by \b, and each backslash by \\. This makes tabs and
- * backspaces visible in an unambiguous way. */
+ * Copy stdin to stdout, replacing tab by "\t", backspace by "\b" and
+ * backslash by "\\" */
 
 #include <stdio.h>
 
@@ -27,5 +26,3 @@ int main() {
 
     return 0;
 }
-
-

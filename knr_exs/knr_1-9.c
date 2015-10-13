@@ -1,6 +1,5 @@
 /* K&R Exercise 1-9
- * Write a program to copy its input to its output, replacing each string of
- * one or more blanks by a single blank. */
+ * Copy stdin to stdout, shortening blanks */
 
 #include <stdio.h>
 
@@ -17,6 +16,7 @@ int main() {
             prev_was_blank = 0;
         }
     }
+
     return 0;
 }
 
