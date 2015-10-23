@@ -44,19 +44,31 @@ def ripple_carry_adder(A, B, C_0=0):
 def ripple_carry_subtractor(A, B):
     return ripple_carry_adder(A, B, 1)
 
-def multiplexer_2to1(S, I_1, I_0, E=1, E_active_state='H'):
+def multiplexer_2to1(I_1, I_0, S, E=1, E_active_state='H'):
     if E_active_state == 'L':
         E = NOT(E)
     return OR(AND3(I_1, S,      E),
               AND3(I_0, NOT(S), E))
 
-def multiplexer_4to1(S_1, S_0, I_3, I_2, I_1, I_0, E=1, E_active_state='H'):
+def multiplexer_4to1(I_3, I_2, I_1, I_0, S_1, S_0, E=1, E_active_state='H'):
     if E_active_state == 'L':
         E = NOT(E)
     return OR4(AND4(I_3, S_1,      S_0,      E),
                AND4(I_2, S_1,      NOT(S_0), E),
                AND4(I_1, NOT(S_1), S_0,      E),
                AND4(I_0, NOT(S_1), NOT(S_0), E))
+
+def demultiplexer_1to4(I, S_1, S_0, E=1, E_active_state='H'):
+    """
+    @rtype: int, int, int, int
+    @return: MSB, ..., LSB
+    """
+    if E_active_state == 'L':
+        E = NOT(E)
+    return (AND4(I, S_1,      S_0,      E),
+            AND4(I, S_1,      NOT(S_0), E),
+            AND4(I, NOT(S_1), S_0,      E),
+            AND4(I, NOT(S_1), NOT(S_0), E))
 
 # TODO: Add enable
 def encoder_4to2(I_3, I_2, I_1, I_0):
