@@ -6,6 +6,9 @@ notational consistency.
 def AND(A, B):
     return int(A and B)
 
+def AND3(A, B, C):
+    return int(A and B and C)
+
 def OR(A, B):
     return int(A or B)
 
