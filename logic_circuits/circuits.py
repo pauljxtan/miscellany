@@ -58,6 +58,16 @@ def multiplexer_4to1(I_3, I_2, I_1, I_0, S_1, S_0, E=1, E_active_state='H'):
                AND4(I_1, NOT(S_1), S_0,      E),
                AND4(I_0, NOT(S_1), NOT(S_0), E))
 
+def demultiplexer_1to2(I, S, E=1, E_active_state='H'):
+    """
+    @rtype: int, int
+    @return: MSB, LSB
+    """
+    if E_active_state == 'L':
+        E = NOT(E)
+    return (AND3(I, S,      E),
+            AND3(I, NOT(S), E))
+
 def demultiplexer_1to4(I, S_1, S_0, E=1, E_active_state='H'):
     """
     @rtype: int, int, int, int
