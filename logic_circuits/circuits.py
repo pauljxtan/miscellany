@@ -1,4 +1,4 @@
-from gates import AND, OR, XOR
+from gates import AND, AND3, AND4, NOT, OR, OR4, XOR
 
 def half_adder(A, B):
     S = XOR(A, B)
@@ -43,3 +43,17 @@ def ripple_carry_adder(A, B, C_0=0):
 
 def ripple_carry_subtractor(A, B):
     return ripple_carry_adder(A, B, 1)
+
+def multiplexer_2to1(S, A, B, E=1, E_active_state='H'):
+    if E_active_state == 'L':
+        E = NOT(E)
+    return OR(AND3(A, NOT(S), E),
+              AND3(B, S,      E))
+
+def multiplexer_4to1(S_0, S_1, A, B, C, D, E=1, E_active_state='H'):
+    if E_active_state == 'L':
+        E = NOT(E)
+    return OR4(AND4(A, NOT(S_0), NOT(S_1), E),
+               AND4(B, S_0,      NOT(S_1), E),
+               AND4(C, NOT(S_0), S_1,      E),
+               AND4(D, S_0,      S_1,      E))
