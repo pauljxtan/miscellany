@@ -5,3 +5,8 @@ Logic circuits in Python just for fun. The plan is to add more stuff as I go thr
 ### Modules
 * __gates.py__: logic gates
 * __circuits.py__: logic circuits
+    * Adders
+    * Multiplexers
+    * Demultiplexers
+    * Encoders
+    * Decoders
