@@ -9,6 +9,9 @@ def AND(A, B):
 def AND3(A, B, C):
     return int(A and B and C)
 
+def AND4(A, B, C, D):
+    return int(A and B and C and D)
+
 def OR(A, B):
     return int(A or B)
 
