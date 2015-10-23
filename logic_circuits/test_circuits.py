@@ -22,30 +22,41 @@ class Tests(unittest.TestCase):
         self.assertEqual(circuits.full_adder(1, 1, 1), (1, 1))
 
     def test_multiplexer_2to1(self):
-        for (S, I_1, I_0) in itertools.product((0, 1), repeat=3):
+        for (I_1, I_0, S) in itertools.product((0, 1), repeat=3):
             if S == 0:
-                self.assertEqual(circuits.multiplexer_2to1(S, I_1, I_0), I_0)
+                self.assertEqual(circuits.multiplexer_2to1(I_1, I_0, S), I_0)
             else:
-                self.assertEqual(circuits.multiplexer_2to1(S, I_1, I_0), I_1)
+                self.assertEqual(circuits.multiplexer_2to1(I_1, I_0, S), I_1)
 
         # Test enable=0 (active high)
         for (S, I_1, I_0) in itertools.product((0, 1), repeat=3):
             self.assertEqual(circuits.multiplexer_2to1(S, I_1, I_0, E=0), 0)
 
     def test_multiplexer_4to1(self):
-        for (S_1, S_0, I_3, I_2, I_1, I_0) in itertools.product((0, 1), repeat=6):
+        for (I_3, I_2, I_1, I_0, S_1, S_0) in itertools.product((0, 1), repeat=6):
             if S_1 == 0 and S_0 == 0:
-                self.assertEqual(circuits.multiplexer_4to1(S_1, S_0, I_3, I_2, I_1, I_0), I_0)
-            elif S_1 == 0 and S_0 == 1:
-                self.assertEqual(circuits.multiplexer_4to1(S_1, S_0, I_3, I_2, I_1, I_0), I_1)
-            elif S_1 == 1 and S_0 == 0:
-                self.assertEqual(circuits.multiplexer_4to1(S_1, S_0, I_3, I_2, I_1, I_0), I_2)
-            else:
-                self.assertEqual(circuits.multiplexer_4to1(S_1, S_0, I_3, I_2, I_1, I_0), I_3)
+                self.assertEqual(circuits.multiplexer_4to1(I_3, I_2, I_1, I_0, S_1, S_0), I_0)
+            elif S_1 == 0 and S_0 == 1:                                                
+                self.assertEqual(circuits.multiplexer_4to1(I_3, I_2, I_1, I_0, S_1, S_0), I_1)
+            elif S_1 == 1 and S_0 == 0:                                                
+                self.assertEqual(circuits.multiplexer_4to1(I_3, I_2, I_1, I_0, S_1, S_0), I_2)
+            else:                                                                      
+                self.assertEqual(circuits.multiplexer_4to1(I_3, I_2, I_1, I_0, S_1, S_0), I_3)
 
         # Test enable=0 (active high)
-        for (S_1, S_0, I_3, I_2, I_1, I_0) in itertools.product((0, 1), repeat=6):
-            self.assertEqual(circuits.multiplexer_4to1(S_1, S_0, I_3, I_2, I_1, I_0, E=0), 0)
+        for (I_3, I_2, I_1, I_0, S_1, S_0) in itertools.product((0, 1), repeat=6):
+            self.assertEqual(circuits.multiplexer_4to1(I_3, I_2, I_1, I_0, S_1, S_0, E=0), 0)
+
+    def test_demultiplexer_1to4(self):
+        for (I, S_1, S_0) in itertools.product((0, 1), repeat=3):
+            if S_1 == 0 and S_0 == 0:
+                self.assertEqual(circuits.demultiplexer_1to4(I, S_1, S_0)[3-0], I)
+            elif S_1 == 0 and S_0 == 1:
+                self.assertEqual(circuits.demultiplexer_1to4(I, S_1, S_0)[3-1], I)
+            elif S_1 == 1 and S_0 == 0:
+                self.assertEqual(circuits.demultiplexer_1to4(I, S_1, S_0)[3-2], I)
+            else:
+                self.assertEqual(circuits.demultiplexer_1to4(I, S_1, S_0)[3-3], I)
 
     def test_encoder_4to2(self):
         self.assertEqual(circuits.encoder_4to2(0, 0, 0, 1), (0, 0))
