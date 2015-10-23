@@ -10,6 +10,16 @@ class Tests(unittest.TestCase):
         self.assertEqual(gates.AND(1, 0), 0)
         self.assertEqual(gates.AND(1, 1), 1)
 
+    def test_AND3(self):
+        self.assertEqual(gates.AND3(0, 0, 0), 0)
+        self.assertEqual(gates.AND3(0, 0, 1), 0)
+        self.assertEqual(gates.AND3(0, 1, 0), 0)
+        self.assertEqual(gates.AND3(0, 1, 1), 0)
+        self.assertEqual(gates.AND3(1, 0, 0), 0)
+        self.assertEqual(gates.AND3(1, 0, 1), 0)
+        self.assertEqual(gates.AND3(1, 1, 0), 0)
+        self.assertEqual(gates.AND3(1, 1, 1), 1)
+
     def test_OR(self):
         self.assertEqual(gates.OR(0, 0), 0)
         self.assertEqual(gates.OR(0, 1), 1)
