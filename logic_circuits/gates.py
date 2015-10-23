@@ -12,6 +12,9 @@ def AND3(A, B, C):
 def OR(A, B):
     return int(A or B)
 
+def OR4(A, B, C, D):
+    return int(A or B or C or D)
+
 def NOT(A):
     return int(not A)
 
