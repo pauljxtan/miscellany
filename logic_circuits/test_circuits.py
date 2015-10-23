@@ -47,6 +47,13 @@ class Tests(unittest.TestCase):
         for (I_3, I_2, I_1, I_0, S_1, S_0) in itertools.product((0, 1), repeat=6):
             self.assertEqual(circuits.multiplexer_4to1(I_3, I_2, I_1, I_0, S_1, S_0, E=0), 0)
 
+    def test_demultiplexer_1to2(self):
+        for (I, S) in itertools.product((0, 1), repeat=2):
+            if S == 0:
+                self.assertEqual(circuits.demultiplexer_1to2(I, S)[1-0], I)
+            else:
+                self.assertEqual(circuits.demultiplexer_1to2(I, S)[1-1], I)
+
     def test_demultiplexer_1to4(self):
         for (I, S_1, S_0) in itertools.product((0, 1), repeat=3):
             if S_1 == 0 and S_0 == 0:
