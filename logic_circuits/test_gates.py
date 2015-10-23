@@ -26,6 +26,24 @@ class Tests(unittest.TestCase):
         self.assertEqual(gates.OR(1, 0), 1)
         self.assertEqual(gates.OR(1, 1), 1)
 
+    def test_OR4(self):
+        self.assertEqual(gates.OR4(0, 0, 0, 0), 0)
+        self.assertEqual(gates.OR4(0, 0, 0, 1), 1)
+        self.assertEqual(gates.OR4(0, 0, 1, 0), 1)
+        self.assertEqual(gates.OR4(0, 0, 1, 1), 1)
+        self.assertEqual(gates.OR4(0, 1, 0, 0), 1)
+        self.assertEqual(gates.OR4(0, 1, 0, 1), 1)
+        self.assertEqual(gates.OR4(0, 1, 1, 0), 1)
+        self.assertEqual(gates.OR4(0, 1, 1, 1), 1)
+        self.assertEqual(gates.OR4(1, 0, 0, 0), 1)
+        self.assertEqual(gates.OR4(1, 0, 0, 1), 1)
+        self.assertEqual(gates.OR4(1, 0, 1, 0), 1)
+        self.assertEqual(gates.OR4(1, 0, 1, 1), 1)
+        self.assertEqual(gates.OR4(1, 1, 0, 0), 1)
+        self.assertEqual(gates.OR4(1, 1, 0, 1), 1)
+        self.assertEqual(gates.OR4(1, 1, 1, 0), 1)
+        self.assertEqual(gates.OR4(1, 1, 1, 1), 1)
+
     def test_NOT(self):
         self.assertEqual(gates.NOT(0), 1)
         self.assertEqual(gates.NOT(1), 0)
