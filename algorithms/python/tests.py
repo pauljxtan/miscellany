@@ -2,6 +2,7 @@ import random
 import unittest
 
 import convert
+import puzzles
 import search
 import sort
 import sums
@@ -22,6 +23,12 @@ class Tests(unittest.TestCase):
         self.assertEqual(convert.base10_to_basen(42, 17), '28')
         self.assertEqual(convert.base10_to_basen(42, 23), '1j')
         self.assertEqual(convert.base10_to_basen(42, 30), '1c')
+
+    def test_puzzles(self):
+        # Towers of Hanoi
+        self.assertEqual(puzzles.hanoi_rec(0), [])
+        for h in range(1, 10):
+            self.assertEqual(puzzles.hanoi_rec(h, draw=False)[-1][-1], list(reversed(range(1, h+1))))
 
     def test_search(self):
         # Set up array to search
