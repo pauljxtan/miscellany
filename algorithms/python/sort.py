@@ -178,7 +178,7 @@ def quick_sort(x):
 
 def quick_sort_rec(x, m, n):
     if m < n:
-        i, j = partition(x, m, n)
+        x, i, j = partition(x, m, n)
         x = quick_sort_rec(x, m, j)
         x = quick_sort_rec(x, i, n)
 
@@ -201,4 +201,16 @@ def partition(x, i, j):
         if i > j:
             break
 
-    return i, j
+    return x, i, j
+
+def quick_sort_v2(x):
+    if len(x) <= 1:
+        return x
+
+    # Use first element as pivot
+    pivot = x[0]
+    first = quick_sort_v2([elem for elem in x[1:] if elem < pivot])
+    second = quick_sort_v2([elem for elem in x[1:] if elem > pivot])
+
+    # Include repeated pivots
+    return first + x.count(pivot) * pivot + second

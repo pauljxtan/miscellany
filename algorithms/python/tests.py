@@ -78,6 +78,9 @@ class Tests(unittest.TestCase):
         # Quick sort
         self.assertEqual(sort.quick_sort(x), sorted(x))
 
+        # Quick sort v2
+        self.assertEqual(sort.quick_sort_v2(x), sorted(x))
+
     def test_sums(self):
         # Set up array to sum
         array_len = 512
