@@ -75,6 +75,9 @@ class Tests(unittest.TestCase):
         # Heap sort
         self.assertEqual(sort.heap_sort(x), sorted(x))
 
+        # Quick sort
+        self.assertEqual(sort.quick_sort(x), sorted(x))
+
     def test_sums(self):
         # Set up array to sum
         array_len = 512

@@ -172,3 +172,33 @@ def sift_down(x, root, end):
             break
 
     return x
+
+def quick_sort(x):
+    return quick_sort_rec(x, 0, len(x) - 1)
+
+def quick_sort_rec(x, m, n):
+    if m < n:
+        i, j = partition(x, m, n)
+        x = quick_sort_rec(x, m, j)
+        x = quick_sort_rec(x, i, n)
+
+    return x
+
+def partition(x, i, j):
+    pivot = x[(i + j) / 2]
+
+    while True:
+        while x[i] < pivot:
+            i += 1
+        while x[j] > pivot:
+            j -= 1
+
+        if i <= j:
+            x[i], x[j] = x[j], x[i]
+            i += 1
+            j -= 1
+
+        if i > j:
+            break
+
+    return i, j
