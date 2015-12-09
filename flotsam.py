@@ -50,7 +50,28 @@ def intersection(sets):
     """
     return reduce(lambda x, y: x & y, sets)
 
-#----
+def reduce2(f, a):
+    """
+    My implementation of the reduce() function itself.
+    """
+    if len(a) == 0:
+        raise ValueError("Reducing an empty list")
+    if len(a) == 1:
+        return a[0]
+    if len(a) == 2:
+        return f(a[0], a[1])
+    return f(a[0], reduce2(f, a[1:]))
+
+#---- Higher-order functions (Haskell-inspired)
+
+def zip_with(f, a, b):
+    if len(a) != len(b):
+        raise ValueError("Lists have unequal lengths")
+    if len(a) == 0:
+        return a
+    if len(a) == 1:
+        return [f(a[0], b[0])]
+    return [f(a[0], b[0])] + zip_with(f, a[1:], b[1:])
 
 #====
 
@@ -85,6 +106,11 @@ def test():
     print union([X, Y, Z])
     print intersection([X, Y, Z])
     print
+
+    b = [1, 3, 5, 7, 9]
+    print zip_with(lambda x, y: x + y, a, b)
+    print reduce(lambda x, y: x + y, a)
+    print reduce2(lambda x, y: x + y, a)
 
 if __name__ == '__main__':
     test()
