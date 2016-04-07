@@ -1,6 +1,40 @@
 """""""""""""
 " My .vimrc "
 """""""""""""
+" Very much inspired by: https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
+
+"""" VUNDLE SETUP
+set nocompatible              " required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Add all your plugins here (note older versions of Vundle used Bundle
+" instead of Plugin)
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
+Bundle 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+"
+let mapleader = "\<space>"
 
 """" VISUAL STUFF
 " set colorscheme
@@ -30,6 +64,9 @@ set laststatus=2
 set statusline=%F\ %y\ %l\,%v\ %P
 "use line wrapping
 set wrap
+
+let python_highlight_all=1
+syntax on
 """"
 
 """" FILE FORMAT, ENCODING
@@ -127,3 +164,32 @@ let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 "let g:Tex_CompileRule_pdf='pdflatex -interaction=nonstopmode $*'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""" Pydiction
+let g:pydiction_location = '/home/paultan/src/rkulla-pydiction-41c7143/complete-dict'
+
+"""" SimpylFold
+" Show docstrings for folded code
+let g:SimpylFold_docstring_preview=1
+
+"""" YouCompleteMe
+" Hide autocomplete window when done
+let g:ycm_autoclose_preview_window_after_completion=1
+" Shortcut for goto definition
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"map <leader>gt  :YcmCompleter GoTo<CR>
+"map <leader>g :YcmCompleter GetDoc<CR>
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+"""" nerdtree
+" ignore *.pyc
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
