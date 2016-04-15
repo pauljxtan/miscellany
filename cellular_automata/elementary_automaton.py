@@ -78,7 +78,7 @@ def display_automaton(rows):
 def main():
     if len(sys.argv) < 4:
         print "Insufficient arguments"
-        print "Usage: python wolfram_automaton.py [rule number] [width] [height]"
+        print "Usage: python elementary_automaton.py [rule number] [width] [height]"
         sys.exit()
 
     rule_num = int(sys.argv[1])
