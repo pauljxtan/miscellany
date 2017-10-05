@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Colour Viewer</title>
+
+    <style>
+        .input-invalid {
+            border-color: red;
+        }
+
+        .colour-display {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<h1>HTML Colour Viewer</h1>
+
+<div id="colour-inputs"></div>
+
+<button onclick="addColourInput()">+</button>
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous"></script>
+
+<script>
+    var numberOfColourInputs = 0;
+
+    $(document).ready(function () {
+        addColourInput();
+    });
+
+    function evaluateColourInput(inputControl, displayId) {
+        var colourString = $(inputControl).val();
+        if (colourString.length !== 0 && colourString.length !== 6) {
+            $(inputControl).addClass('input-invalid');
+            $(displayId).html('Please enter a valid value.');
+            return;
+        }
+        $(inputControl).removeClass('input-invalid');
+        if (colourString.length === 0) {
+            $(displayId).html('Please enter a valid value.');
+            return;
+        }
+        var validHex = /^[0-9A-F]{6}$/i.test(colourString);
+        if (!validHex) {
+            $(displayId).html('Please enter a valid value.');
+            return;
+        }
+        $(displayId).html('&nbsp;').css('background-color', '#' + colourString);
+    }
+
+    function addColourInput() {
+        numberOfColourInputs++;
+        var html = '<div class="colour-input-group"><span class="addon">#</span>';
+        html += '<input id="colour-input-' + numberOfColourInputs.toString() + '" ';
+        html += 'class="colour-input" maxlength="6" placeholder="Try me" ';
+        html += 'onkeyup="evaluateColourInput(this, \'#colour-display-' + numberOfColourInputs.toString() + '\');">';
+        html += '<div id="colour-display-' + numberOfColourInputs.toString() + '" class="colour-display">&nbsp;</div></div>';
+        $('#colour-inputs').append(html);
+    }
+</script>
+</body>
+</html>
