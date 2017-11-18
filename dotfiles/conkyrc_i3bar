@@ -12,5 +12,6 @@ conky.config = {
 }
 
 conky.text = [[
-$nodename | ${time %A %Y-%m-%d} ${time %T} | CPU: $cpu% ${cpubar 1,10} | MEM: $mem / $memmax ${membar 1,10} | Swap: $swap / $swapmax ${swapbar 1,10} | /: ${fs_used /} / ${fs_size /} ${fs_bar 1,10 /} | /home: ${fs_used /home} / ${fs_size /home} ${fs_bar 1,10 /home} | Down: ${downspeed wlp4s0}/s | Up: $color${upspeed wlp4s0}/s
+#$nodename | ${time %a %Y-%m-%d} ${time %T} | CPU: $cpu% ${cpubar 1,10} | Mem: $mem / $memmax ${membar 1,10} | Swap: $swap / $swapmax ${swapbar 1,10} | /: ${fs_used /} / ${fs_size /} ${fs_bar 1,10 /} | /home: ${fs_used /home} / ${fs_size /home} ${fs_bar 1,10 /home} | Down: ${downspeed wlp4s0}/s | Up: $color${upspeed wlp4s0}/s
+$nodename | ${time %a %Y-%m-%d} ${time %T} | CPU: $cpu% | Mem: $mem / $memmax | Swap: $swap / $swapmax | /: ${fs_used /} / ${fs_size /} | /home: ${fs_used /home} / ${fs_size /home} | Down: ${downspeed wlp4s0}/s | Up: $color${upspeed wlp4s0}/s | BAT0: ${battery_short BAT0} | BAT1: ${battery_short BAT1} | Vol: ${exec ~/bin/volume.sh}
 ]]
