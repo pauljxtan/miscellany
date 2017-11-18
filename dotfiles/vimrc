@@ -29,6 +29,36 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'tpope/vim-commentary'
+Plugin 'terryma/vim-expand-region'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'roxma/vim-hug-neovim-rpc'
+"Plugin 'Shougo/deoplete.nvim'
+Plugin 'Shougo/neocomplete.vim'
+
+" ELIXIR
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'slashmili/alchemist.vim'
+Plugin 'vim-scripts/conque-shell'
+
+" HASKELL
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'itchyny/vim-haskell-indent'
+Plugin 'eagletmt/neco-ghc'
+Plugin 'neovimhaskell/haskell-vim'
+Plugin 'nbouscal/vim-stylish-haskell'
+Plugin 'bitc/vim-hdevtools'
+Plugin 'dag/vim2hs'
+
+" RUST
+Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer'
+
+" COLOURS
+Plugin 'morhetz/gruvbox'
+"
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -36,20 +66,39 @@ filetype plugin indent on    " required
 "
 let mapleader = "\<space>"
 
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" neco-ghc
+let g:necoghc_enable_detailed_browse = 1
+
 """" VISUAL STUFF
 " set colorscheme
-colorscheme herald
+"colorscheme herald
+
+colorscheme gruvbox
+set background=dark
+let g:gruvbox_contrast_dark = "hard"
+let g:gruvbox_contrast_light = "hard"
+
+" Folded highlight looks to similar to cursor line highlight, manually changing
+autocmd ColorScheme gruvbox hi FoldColumn ctermbg=234 ctermfg=29 cterm=none
+autocmd ColorScheme gruvbox hi Folded     ctermbg=234 ctermfg=29 cterm=none 
+
+
 " use syntax processing
 syntax enable
 " use filetype plugins
 filetype plugin on
 filetype indent on
 " show line numbers
-"set number
+set number
 " show latest command
 set showcmd 
-" show cursor line
+" highlight line/column under cursor
 set cursorline
+"set cursorcolumn
 " show tab-completion matches
 set wildmenu
 " highlight matching braces (kind of annoying with blinking cursor)
@@ -67,6 +116,9 @@ set wrap
 
 let python_highlight_all=1
 syntax on
+
+" true colour terminal
+"set termguicolors
 """"
 
 """" FILE FORMAT, ENCODING
@@ -180,6 +232,8 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "map <leader>gt  :YcmCompleter GoTo<CR>
 "map <leader>g :YcmCompleter GetDoc<CR>
 
+let g:ycm_server_python_interpreter = 'python'
+
 "python with virtualenv support
 py << EOF
 import os
@@ -193,3 +247,67 @@ EOF
 """" nerdtree
 " ignore *.pyc
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+
+" ===================================================================
+" neocomplete
+" Disable YCM for haskell
+let g:ycm_filetype_blacklist = { 'haskell': 1 }
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" Enable omni completion.
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+" RACER ===================================================
+" it's worth turning on 'hidden' mode for buffers otherwise you need to save
+" the current buffer every time you do a goto-definition
+set hidden
+let g:racer_cmd = "/home/paultan/bin/racer"
+" Full function definition
+let g:racer_experimental_completer = 1
