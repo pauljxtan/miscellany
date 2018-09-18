@@ -4,7 +4,7 @@ conky.config = {
     out_to_console = true,
     background = false,
     max_text_width = 0,
-    update_interval = 1.0,
+    update_interval = 5.0,
     total_run_times = 0,
     short_units = true,
     use_spacer = 'left',
@@ -12,6 +12,7 @@ conky.config = {
 }
 
 conky.text = [[
-#$nodename | ${time %a %Y-%m-%d} ${time %T} | CPU: $cpu% ${cpubar 1,10} | Mem: $mem / $memmax ${membar 1,10} | Swap: $swap / $swapmax ${swapbar 1,10} | /: ${fs_used /} / ${fs_size /} ${fs_bar 1,10 /} | /home: ${fs_used /home} / ${fs_size /home} ${fs_bar 1,10 /home} | Down: ${downspeed wlp4s0}/s | Up: $color${upspeed wlp4s0}/s
-$nodename | ${time %a %Y-%m-%d} ${time %T} | CPU: $cpu% | Mem: $mem / $memmax | Swap: $swap / $swapmax | /: ${fs_used /} / ${fs_size /} | /home: ${fs_used /home} / ${fs_size /home} | Down: ${downspeed wlp4s0}/s | Up: $color${upspeed wlp4s0}/s | BAT0: ${battery_short BAT0} | BAT1: ${battery_short BAT1} | Vol: ${exec ~/bin/volume.sh}
+${time %m-%d %T} | C $cpu% M $memperc% S $swapperc% | R ${fs_free /} H ${fs_free /home} | $gw_iface D ${downspeed wlp4s0}/s U $color${upspeed wlp4s0}/s | ${battery_short BAT0} ${battery_short BAT1} | V ${exec ~/bin/volume.sh} | ${exec xbacklight -get | awk '{printf("%2.0f", $0)}'}%
 ]]
+
+-- ${time %Y-%m-%d %T} | CPU $cpu% | Mem $mem/$memmax | Swap $swap/$swapmax | / ${fs_used /}/${fs_size /} | /home ${fs_used /home}/${fs_size /home} | $gw_iface D ${downspeed wlp4s0}/s U $color${upspeed wlp4s0}/s | ${battery_short BAT0} ${battery_short BAT1} | ${exec ~/bin/volume.sh} | ${exec xbacklight -get | awk '{printf("%2.0f", $0)}'}%
